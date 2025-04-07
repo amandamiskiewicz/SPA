@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paragon zakupu</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        body {
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .receipt {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            width: 280px;
+            text-align: left;
+            white-space: pre-line;
+        }
+        .line {
+            border-top: 2px dashed black;
+            margin: 5px 0;
+        }
+        .double-line {
+            border-top: 3px double black;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="receipt">
+            RECEIPT
+            <div class="line"></div>
+            Product: {{ product.name }} <br>
+            Unit Price: {{ product.price }} zł <br>
+            Quantity: {{ product.quantity }} <br>
+            Amount: {{ amount }} zł <br>
+            VAT Tax Rate: {{ vatRate }}% <br>
+            <div class="double-line"></div>
+            Total: {{ total }} zł
+        </div>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    product: {
+                        name: "book",
+                        quantity: 3,
+                        price: 17
+                    },
+                    vatRate: 23
+                };
+            },
+            computed: {
+                amount() {
+                    return (this.product.quantity * this.product.price).toFixed(2);
+                },
+                total() {
+                    return (this.amount * (1 + this.vatRate / 100)).toFixed(2);
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>

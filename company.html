@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wizytówka Firmy</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .business-card {
+            background: white;
+            padding: 20px;
+            border: 1px solid black; /* Cienka czarna ramka */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: center;
+        }
+        .business-card h2 {
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .business-card a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .business-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="business-card">
+            <h2>{{ company.name }}</h2>
+            <p>{{ company.address }}</p>
+            <p>{{ company.zip }} {{ company.city }}</p>
+            <p>Tel: {{ company.phone }}</p>
+            <p>Strona: <a :href="company.website" target="_blank">{{ company.website }}</a></p>
+        </div>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    company: {
+                        name: "UNIKPOL S.A.",
+                        address: "ul. Ukryta 5",
+                        zip: "02-114",
+                        city: "Rawa Mazowiecka",
+                        phone: "22 345 90 21, 888 213 992",
+                        website: "http://www.unikpol.pl"
+                    }
+                };
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
